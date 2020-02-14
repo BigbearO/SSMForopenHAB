@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!-- 使用注解驱动 -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.xhf.*" />
+
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/chapter22?useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="123456" />
+        <property name="maxActive" value="255" />
+        <property name="maxIdle" value="5" />
+        <property name="maxWait" value="10000" />
+    </bean>
+
+    <!-- 集成MyBatis -->
+    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!--指定MyBatis配置文件
+        <property name="configLocation" value="classpath:/mybatis-cfg.xml" />
+        -->
+    </bean>
+<!--    <mybatis-spring:scan base-package="com.xhf.mapper"/>-->
+<!--    上面这排可写可不写，但是不写则在dao层文件里要加注解@Repository-->
+
+    <!-- 配置数据源事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+    <!-- 如果有配置数据库事务,需要开启注解事务的，需要开启这段代码 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!-- 采用自动扫描方式创建mapper bean -->
+    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xhf" />
+        <property name="sqlSessionFactoryBeanName" value="SqlSessionFactory" />
+        <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+    </bean>
+
+
+
+
+</beans>
