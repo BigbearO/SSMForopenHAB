@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员主界面</title>
+    <link href="/ssmForopenHAB_war/resource/css/index.css" rel="stylesheet" type="text/css" />
+    <link href="/ssmForopenHAB_war/resource/css/timer.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+<div id="timer">
+    <input type="text" size="50" id="clock" class="timer" readonly=""/>
+    <!--<input type="button" value="点此暂停时间" id="btn" />-->
+</div>
+
+<div id="daohang"  >
+    <ul id="ul1" style="list-style-type:none ">
+        <li class="xiang "  id="b_g"  ></li>
+        <li class="xiang uli" onclick="zdy()"  >定义场景</li>
+        <li class="xiang uli" onclick="paper()">paperUI</li>
+        <li class="xiang uli" onclick="basic()">baiscUI</li>
+        <li class="xiang uli" onclick="miyue()">管理密钥</li>
+        <li class="xiang uli" onclick="zhanghao()">管理用户</li>
+    </ul>
+    <!--<div class="test"> 测试文字</div>-->
+</div>
+
+<div class="content">
+    <iframe src="toqingjing" id="iframe"  name="right" style="min-width: 1100px"></iframe>
+
+</div>
+</body>
+
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/test.js"></script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>
+</html>

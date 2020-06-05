@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>管理密钥</title>
+    <link href="/ssmForopenHAB_war/resource/css/list.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<a class="newmiyue" href="toadd.do">
+    新增密钥
+</a>
+<table class="table table-hover table-sm table-bordered">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>密钥内容</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--这里循环输出时间类-->
+    <!--/*@thymesVar id="miyues" type=""*/-->
+    <tr th:each="miyue:${miyues}">
+        <!--/*@thymesVar id="id" type=""*/-->
+        <td th:text="${miyue.id}">id</td>
+        <!--/*@thymesVar id="miyue" type=""*/-->
+        <td th:text="${miyue.miyue }"> 应该是内容</td>
+        <td>
+            <a th:href="@{/toupdate.do(id=${miyue.id},miyue=${miyue.miyue})}" onClick="return confirm('确定修改?');">
+                <input type="button" value="修改此项">
+            </a>
+            <a th:href="@{/deletemiyue.do(id=${miyue.id},miyue=${miyue.miyue})}" onClick="return confirm('确定删除?');">
+                <input type="button" value="删除此项"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <!--/*@thymesVar id="msg" type=""*/-->
+    <span th:text="${msg}" ></span>
+
+</div>
+
+</body>
+</html>

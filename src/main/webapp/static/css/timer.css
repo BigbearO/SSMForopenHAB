@@ -1,0 +1,10 @@
+#timer{
+    position:absolute;
+    transform: translateX(1300px) translateX(10px);
+    width: 150px;
+
+}
+#clock{
+    width: 150px;
+    border: solid 1px ;
+}

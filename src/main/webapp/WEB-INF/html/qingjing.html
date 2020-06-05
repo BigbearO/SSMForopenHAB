@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>场景模式</title>
+    <link href="/ssmForopenHAB_war/resource/css/qingjing.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<br><br>
+
+<!--<div>这是测试有没有页面热部署</div>-->
+
+<a href="toaddrule.do"><div class="lianjie" >新增场景</div></a>
+<div class="big">
+    <div th:text="${msg}"></div>
+    <table class="table table-hover table-sm table-bordered">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>名字</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <th></th>
+            <th>时间触发类</th>
+        </tr>
+        <!--这里循环输出时间类-->
+        <!--/*@thymesVar id="timers" type=""*/-->
+        <tr th:each="timer:${timers}">
+            <td th:text="${timer.id}">测试</td>
+            <!--/*@thymesVar id="rulename" type=""*/-->
+            <td th:text="${timer.rulename}"> 测试</td>
+            <td>
+                <a th:href="@{/bantimerrules.do(id=${timer.id},rule=${timer.rule},useful=${timer.useful})}">
+                       <!--/*@thymesVar id="timer" type=""*/-->
+                       <span  th:switch="${timer.useful}" >
+                        <input th:case="0" type="button" value="启用（已禁用）">
+                        <input th:case="1" type="button" value="禁用（已启用）">
+                    </span>
+                </a>
+                <a th:href="@{/toupdatetimerrules.do(id=${timer.id},rule=${timer.rule},rulename=${timer.rulename})}"> <input type="button" value="修改"></a>
+                <a th:href="@{/deletetimerrules.do(id=${timer.id},rule=${timer.rule})}" onClick="return confirm('确定删除?');">
+                    <input type="button" value="删除此项"></a>
+            </td>
+        </tr>
+        <br> <br>  <br>
+        <tr>
+            <th></th>
+            <th>事件触发类</th>
+        </tr>
+        <!--这里循环输出事件类-->
+        <!--/*@thymesVar id="items" type=""*/-->
+        <tr  th:each="item:${items}" >
+            <td th:text="${item.id}">测试</td>
+            <td th:text="${item.rulename}">测试</td>
+            <td>
+                <a th:href="@{/banitemrules.do(id=${item.id},rule=${item.rule},useful=${item.useful})}">
+                    <span  th:switch="${item.useful}" >
+                        <input th:case="0" type="button" value="启用（已禁用）">
+                        <input th:case="1" type="button" value="禁用（已启用）">
+                    </span>
+                </a>
+                <a th:href="@{/toupdateitemrules.do(id=${item.id},rule=${item.rule},rulename=${item.rulename})}"> <input type="button" value="修改"></a>
+                <a th:href="@{/deleteitemrules.do(id=${item.id},rule=${item.rule})}" onClick="return confirm('确定删除?');">
+                    <input type="button" value="删除此项"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+</body>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>
+</html>

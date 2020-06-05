@@ -1,0 +1,35 @@
+body{
+    background-image: url("../image/weimei3.jpg");
+    background-reapeat: no-repeat ;
+    background-size:100%;
+    position: relative;
+}
+a{
+    text-decoration:none;
+}
+
+th{
+    border: solid 1px orangered;
+    width: 190px;
+    height: 50px;
+}
+
+td{
+    border: solid 1px orangered;
+    width: 190px;
+    height: 50px;
+}
+
+.table{
+    text-align: center;
+    border: solid 1px orange;
+    position:relative;
+    left: 80px;
+    top:60px;
+}
+.newmiyue{
+    position:relative;
+    left: 800px;
+    top:10px;
+    border: solid 2px orangered;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="expires" content="Fri,7 Dec 2018 10:10:10 GMT" />
+    <meta name="robot" content="follow">
+    <title>测试</title>
+    <link href="/ssmForopenHAB_war/resource/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id="timer">
+    <input type="text" size="50" id="clock" />
+    <input type="button" value="点此暂停时间" id="btn" />
+</div>
+
+<div>
+    <form id="form">
+    <!--/*@thymesVar id="test" type=""*/-->
+    <input type="button" value="测试按钮" onclick="ceshi()">
+    </form>
+</div>
+
+</body>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/test.js"></script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/jquery-3.4.1.js"></script>
+<script>
+    function ceshi() {
+        $.ajax({
+            type:"GET",
+            async : false,
+            cache : false,
+            url:"savethings.do",
+            data: $('#form').serialize(),
+            dataType:"json",
+            success:function(data){
+                if (data == "yes"){
+                    alert("将item们处理成功啦，去数据库和文件里面看一下吧");
+                }else {
+                    alert("应该是失败了");
+                }
+            }
+        });
+    }
+    
+    function test() {
+        var tes=document.getElementById("form");
+        tes.action="savethings.do";
+        tes.submit();
+    }
+</script>
+</html>

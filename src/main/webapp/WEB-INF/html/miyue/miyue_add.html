@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新增密钥</title>
+    <link href="/ssmForopenHAB_war/resource/css/miyue.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="form">
+    <fieldset class="reg_frame">
+        <legend>更   新   密   钥</legend>
+        <br>
+        <br>
+        <br>
+        <br>
+        <form   id="addform">
+            <label>请输入密钥：</label>
+            <!--/*@thymesVar id="miyue" type=""*/-->
+            <input type="text" id="miyue" name="miyue" th:text="${miyue}" placeholder="输入密钥，英文或数字"
+                   onkeyup="value=value.replace(/[^\w\.\/]/ig,'')">
+            <br>  <br>
+            <input  type="button"  value="确定"  onclick="add()"/>
+        </form>
+    </fieldset>
+</div>
+
+<div>
+    <!--/*@thymesVar id="msg" type=""*/-->
+    <span th:text="${msg}" ></span>
+
+</div>
+</body>
+<script>
+
+</script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/miyue.js"></script>
+
+</html>

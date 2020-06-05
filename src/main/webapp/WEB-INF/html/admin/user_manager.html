@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>用户账号管理</title>
+    <link href="/ssmForopenHAB_war/resource/css/list.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<table class="table table-hover table-sm table-bordered">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>姓名</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <!--这里循环输出时间类-->
+    <!--/*@thymesVar id="users" type="aj"*/-->
+    <tr th:each="user:${users}">
+        <!--/*@thymesVar id="id" type=""*/-->
+        <td th:text="${user.id}">id</td>
+        <td th:text="${user.name }"> 应该是内容</td>
+        <td>
+                 <span  th:switch="${user.useable}" >
+                     <span th:case="0" >（已封禁）</span>
+                        <span th:case="1" >（已启用）</span>
+                    </span>
+        </td>
+        <td>
+            <!--/*@thymesVar id="useable" type="io"*/-->
+            <a th:href="@{/banuser.do(id=${user.id},useable=${user.useable})}" onClick="return confirm('确定修改封禁状态?');">
+                <input type="button" value="修改封禁状态">
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+小惊喜：<a  href="http://www.baidu.com" onClick="return confirm('确定?');">百度</a>
+
+</body>
+</html>

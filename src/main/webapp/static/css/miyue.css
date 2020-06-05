@@ -1,0 +1,32 @@
+
+body{
+    background-image: url("../image/weimei3.jpg");
+    background-reapeat: no-repeat ;
+    background-size:100%;
+    position: relative;
+}
+a{
+    text-decoration:none;
+}
+legend {
+    white-space: pre;
+}
+label{
+    white-space: pre;
+}
+
+.form{
+    position:relative;
+    left: 450px;
+    top:100px;
+    width: 450px;
+
+}
+
+#addform{
+    position: relative;
+    left: 80px;
+    width: 300px;
+    height: 400px;
+    color: orangered;
+}

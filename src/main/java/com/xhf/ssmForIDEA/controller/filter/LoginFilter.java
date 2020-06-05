@@ -43,16 +43,25 @@ public class LoginFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 	        HttpServletResponse res = (HttpServletResponse)response;
 	        // 有几个路径不需要判断,将它们排除   例如我的是"/login.do"
-	        String[] paths = new String[] { "/toLogin","/toRegister","/Register","/login.do","/toIndex" };
+	        String[] paths = new String[] { "/toLogin.do","/toReg.do", "/TestMiyue.do",
+											"/SentMail.do", "/login.do","/toIndex.do",
+											"/toz.do","/toq.do","/Testyanzhengma.do",
+											"/Reg.do"};
 	        String sp = req.getServletPath();
-	        for (String path : paths) {
-	            // 当前路径是这几个之一
-	            if (path.equals(sp)) {
-	                // 让请求继续执行,无需判断是否登录
-	                chain.doFilter(request, response);
-	                return;
-	            }
-	        }
+
+	        if(sp.endsWith(".js")||sp.endsWith(".css")||sp.endsWith(".jpg")||sp.endsWith(".png")){
+				chain.doFilter(request, response);
+				return;
+			}else {
+				for (String path : paths) {
+					// 当前路径是这几个之一
+					if (path.equals(sp)) {
+						// 让请求继续执行,无需判断是否登录
+						chain.doFilter(request, response);
+						return;
+					}
+				}
+			}
 	        // 判断用户是否登录
 	        HttpSession session = req.getSession();
 	        User user = (User) session.getAttribute("user");

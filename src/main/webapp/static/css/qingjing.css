@@ -1,0 +1,76 @@
+
+.lianjie{
+    position:absolute;
+    right: 100px;
+    color: red;
+    height: 50px;
+    width: 150px;
+    /*border: solid red 1px;*/
+    font-size: +20px;
+}
+.lianjie a{
+    height: 50px;
+    width: 150px;
+    border: solid red 1px;
+    font-size: +30px;
+}
+.changjing{
+    width: 300px;
+    height: 150px;
+    border: orangered solid 3px;
+    position:relative;
+    left: 400px;
+}
+.changjing2{
+    position:relative;
+    left: 800px;
+    transform: translateY(-173px);
+}
+.xinzeng{
+    background-image: url("../image/zengjia.jpg");
+    background-repeat: no-repeat;
+    background-position: 80px;
+    position:relative;
+    transform: translateY(-100px);
+}
+
+body{
+    background-image: url("../image/weimei5.jpg");
+    background-reapeat: no-repeat ;
+    background-size:100%;
+}
+
+th{
+    border: solid 1px orangered;
+    width: 300px;
+    height: 50px;
+}
+
+td{
+    border: solid 1px orangered;
+    width: 300px;
+    height: 50px;
+}
+.lianjie{
+    position:absolute;
+    right: 100px;
+    color: red;
+    height: 50px;
+    width: 150px;
+    /*border: solid red 1px;*/
+    font-size: +20px;
+}
+.lianjie a{
+    height: 50px;
+    width: 150px;
+    border: solid red 1px;
+    font-size: +30px;
+}
+.big{
+    text-align: center;
+}
+.table{
+    position: relative;
+    transform: translateX(5px);
+}
+

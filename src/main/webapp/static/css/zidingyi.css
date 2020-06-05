@@ -1,0 +1,32 @@
+body{
+    background-image: url("../image/weimei3.jpg");
+    background-reapeat: no-repeat ;
+    background-size:100%;
+}
+.zhujie{
+    font-size: 18px;
+    color: orange;
+    position: absolute;
+    left: 100px;
+    top: 100px;
+}
+#zhankai{
+    border: orange solid 3px;
+    width: 50px;
+    text-align: center;
+}
+.xuanze{
+    transform: translateY(100px) translateX(450px);
+    width: 600px;
+    height: 500px;
+}
+.xuanze fieldset{
+
+    height: 500px;
+}
+.tiaojian{
+    border: orange solid 2px;
+    height: 150px;
+    font-size: 30px;
+    text-align: center;
+}

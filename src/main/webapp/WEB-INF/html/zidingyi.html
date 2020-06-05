@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新建智能场景</title>
+    <link href="/ssmForopenHAB_war/resource/css/zidingyi.css" rel="stylesheet" type="text/css" />
+    <link href="/ssmForopenHAB_war/resource/css/layui.css" rel="stylesheet" type="text/css" />
+    <link href="/ssmForopenHAB_war/resource/css/laydate.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="zhujie">
+    <div id="shuoming">什么是场景?</div>
+    <div id="xiangqing" style="display: none">
+        &nbsp;&nbsp
+        场景是多个智能家居设<br>
+        备按照一定规律联合进<br>
+        行运作，从而实现让人<br>
+        们生活更方便的目标<br>
+        &nbsp;&nbsp;
+        自定义场景是用户按照<br>
+        系统引导，挑选条件，<br>
+        筛选设备，从而使得小<br>
+        米智能家居设备按照用<br>
+        户需要的规律进行运作
+    </div>
+    <div id="zhankai" onclick="zhankai()">展开</div>
+</div>
+
+<div class="xuanze "  >
+    <form id="form">
+        <div id="zhineng1">
+            <fieldset >
+                <legend style="color: orangered; font-size:20px">填       写       场       景      名</legend>
+                <label >填写智能名：</label>   <input type="text" name="zhineng_name" id="zhineng_name" class="zhineng">
+                <div class="tiaojian" onclick="next_first()"><span class="choose">定时类</span></div>
+                <div class="tiaojian" onclick="next_second()"><span class="choose">事件类</span></div>
+            </fieldset>
+        </div>
+
+        <div id="zhineng2_1" >
+            <!--style="display: none"-->
+            <fieldset >
+                <legend style="color: orangered; font-size:20px">选       择       执          行          条        件</legend>
+                <label >填写cron表达式：</label>   <input type="text" name="cron" id="cron" class="zhineng"><br>
+
+                <label>选 择 时 分 秒：</label>
+                <div class="layui-inline" >
+                    <div class="layui-input-inline" id="timechoose">
+                        <input type="text" class="layui-input" name="hms" id="test4" placeholder="HH:mm:ss">
+                    </div>
+                </div>
+                <div id="exetypechoose">
+                    <label>选择执行方式：</label>
+                    <select name="timerexetype" class="test">
+                        <option value="1">每天</option>
+                        <option value="2">一次 </option>
+                        <option value="3">周一到周五</option>
+                    </select>
+
+                </div>
+
+                <input type="button" onclick="timer_to_chooseexe()" value="下一步">
+                <input type="button" onclick="timer_to_fenlei()" value="上一步">
+            </fieldset>
+        </div>
+
+        <!--style="display: none" -->
+        <div id="zhineng2_2" >
+            <fieldset >
+                <legend style="color: orangered; font-size:20px">选       择       执          行          条        件</legend>
+                <label>选择触发事件属性：</label>
+                <!--所有的option的value都是itemid-->
+                <select name="item">
+                    <optgroup label="小米网关">
+                        <option>灯光</option>
+                        <option>测试</option>
+                    </optgroup>
+                    <optgroup label="小米无线开关">
+                        <option>省电模式</option>
+                        <option>测试</option>
+                    </optgroup>
+
+                    <optgroup label="小米智能插座">
+                        <option value="">电源</option>
+                        <option value="">使用与否</option>
+
+                    </optgroup>
+                    <optgroup label="小米人体传感器">
+                        <option>测试</option>
+                        <option>测试</option>
+                    </optgroup>
+                    <optgroup label="小米门窗传感器">
+                        <option value="">接触状态</option>
+                        <option></option>
+                    </optgroup>
+
+                </select>
+
+                <label>选择触发事件状态：</label>
+                <select name="trigstatus">
+                    <option value="changed">状态改变</option>
+                    <option value="changed to on">变为开启</option>
+                    <option value="changed to off">变为关闭</option>
+                    <option value="changed from on to off">从开到关</option>
+                    <option value="changed from off to on">从关到开</option>
+                </select>
+                <input type="button" onclick="item_to_chooseexe()" value="下一步" />
+                <input type="button" onclick="item_to_fenlei()" value="上一步">
+            </fieldset>
+        </div>
+        <div  id="zhineng3">
+            <fieldset >
+                <legend style="color: orangered; font-size:20px">选       择       执          行          结        果</legend>
+                <label>选择结果事件属性：</label>
+                <!--所有的option的value都是itemid-->
+                <select name="exeitem">
+                    <optgroup label="小米网关">
+                        <option>灯光</option>
+                        <option>测试</option>
+                    </optgroup>
+                    <optgroup label="小米无线开关">
+                        <option>省电模式</option>
+                        <option>测试</option>
+                    </optgroup>
+
+                    <optgroup label="小米智能插座">
+                        <option value="">电源</option>
+                        <option value="">使用与否</option>
+
+                    </optgroup>
+                    <optgroup label="小米人体传感器">
+                        <option>测试</option>
+                        <option>测试</option>
+                    </optgroup>
+                    <optgroup label="小米门窗传感器">
+                        <option value="">接触状态</option>
+                        <option></option>
+                    </optgroup>
+                </select>
+
+                <label>选择触发事件状态：</label>
+                <select name="exestatus">
+                    <option value="changed to on">变为开启</option>
+                    <option value="changed to off">变为关闭</option>
+                </select>
+
+                <label>选择时间范围</label>
+                <div class="layui-inline" >
+                    <div class="layui-input-inline" >
+                        <label>选择起始时间</label> <input type="text" class="layui-input" name="starttime" id="test" placeholder="HH:mm:ss">
+                        <label>选择终止时间</label> <input type="text" class="layui-input" name="endtime" id="test2" placeholder="HH:mm:ss">
+                    </div>
+                </div>
+                <input type="button" onclick="" id="submitto" value="提交">
+                <input type="button" id="tosec" onclick="tosecond()" value="上一步1">
+            </fieldset>
+        </div>
+    </form>
+
+</div></div>
+
+</body>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"> </script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/laydate.js"> </script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/layui.js"> </script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/zidingyi.js"> </script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/jquey-3.4.1.js"> </script>
+</html>

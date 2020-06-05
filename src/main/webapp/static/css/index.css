@@ -1,0 +1,48 @@
+#iframe{
+    position: relative;
+    height: 700px;
+    width: 900px;
+    left: 200px;
+    top: 5px;
+}
+.xiang{
+    position: relative;
+    height: 80px;
+    width: 200px;
+    /*border: gray  2px;*/
+    left: -42px;
+    text-align: center;
+    font-size: 30px;
+}
+.uli:hover{
+    background-color: gray;
+}
+#daohang{
+    position: absolute;
+    width: 200px;
+    height: 704px;
+    background-color:orange;
+    top:11px;
+    text-align: center;
+}
+#timer{
+    position:relative;
+    transform: translateX(1000px) translateX(10px);
+    width: 150px;
+
+}
+#clock{
+    width: 150px;
+    border: solid 1px ;
+}
+.test:hover{
+    font-size: 25px;
+}
+#ul1{
+    position: relative;
+    top: 80px;
+}
+#b_g{
+    background-image: url("../image/openHAB_bg.jpg");
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+<!--    <link href="css/login.css" rel="stylesheet" type="text/css" />-->
+    <link href="/ssmForopenHAB_war/resource/css/login.css" rel="stylesheet" type="text/css" />
+    <link href="/ssmForopenHAB_war/resource/css/timer.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+<div id="timer">
+    <input type="text" size="50" id="clock" class="timer" readonly=""/>
+    <!--<input type="button" value="点此暂停时间" id="btn" />-->
+</div>
+    <div id="all">
+    <div id="firsrline">注册分三步，请耐心</div><br/>
+    <div class="form" id="reg_info" >
+        <fieldset class="reg_frame">
+            <legend>注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册-3</legend>
+            <form  method="post"  id="reg_form">
+                <label id="name1" >用&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>
+                <input type="text"  id="xingming"  class="input_data" name="name"/>
+                <br/><br/>
+                <label>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+                <input type="password"  class="input_data" id="pass" name="pass" placeholder="请输入6-14位的英文或数字"/><br/><br/>
+                <label>确认密码: </label>
+                <input type="password"  class="input_data" id="repass"/><br/><br/>
+                <br/> <br/>
+                <input type="button"  value="确认" onclick="check_reg_form()"/>
+                &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                <input  Type="reset"   value="重置"/>
+                <br/> <br/>
+            </form>
+        </fieldset>
+    </div>
+
+    <div class="dibu">
+            <hr />
+            <div>
+                <address>  地址：成都信息工程大学</address>
+                <br/> 联系方式:12345667@qq.com
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/test.js"></script>
+<!--<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>-->
+</html>

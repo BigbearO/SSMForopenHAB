@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="expires" content="Fri,7 Dec 2018 10:10:10 GMT" />
+    <meta name="robot" content="follow">
+    <title>登录openHAB</title>
+    <link href="/ssmForopenHAB_war/resource/css/login.css" rel="stylesheet" type="text/css" />
+    <style>
+    </style>
+</head>
+<body>
+
+<div id="timer">
+    <input type="text" size="50" id="clock" class="timer" readonly=""/>
+    <!--<input type="button" value="点此暂停时间" id="btn" />-->
+</div>
+
+
+<div id="all">
+    <div id="firsrline">请在下表登录</div><br/>
+
+    <div class="form">
+            <form  method="post" id="login_form">
+                <fieldset>
+                  <legend>登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</legend>
+                     <label id="name1" >用户名：</label>
+                     <input type="text"  id="xingming"  class="input_data" name="name"/>
+                     <span th:text="${session.msg}"></span>
+                     <br/><br/>
+                     <label>密&nbsp;&nbsp;&nbsp;码：</label>
+                    <input type="password"  class="input_data" id="pass" name="pass"/><br/><br/>
+                     <br/> <br/>
+                     <input type="button"  value="确认登录" onclick="check_login_form()"/>
+                     &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                     <input  Type="reset"   value="重置"/>
+                     <br/> <br/>
+                     <div >还未注册？去<a href="toReg.do" style="color: orangered">注册</a></div>
+                </fieldset>
+            </form>
+    </div>
+
+<div class="dibu">
+    <hr />
+    <div>
+        <address>  地址：成都信息工程大学</address>
+        <br/> 联系方式:12345667@qq.com
+    </div>
+</div>
+</div>
+
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/test.js"></script>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>
+<script>
+</script>
+
+</body>
+</html>

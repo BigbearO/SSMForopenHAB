@@ -1,0 +1,57 @@
+body{
+    background-image: url("../image/weimei5.jpg");
+    background-reapeat: no-repeat ;
+    background-size:100%;
+}
+
+.xuanze{
+    transform: translateY(0px) translateX(100px);
+    width: 600px;
+    height: 500px;
+    white-space:pre;
+}
+.xuanze fieldset{
+    height: 500px;
+}
+.tiaojian{
+    border: orange solid 2px;
+    height: 100px;
+    font-size: 30px;
+    text-align: center;
+    color: #FFFF00;
+}
+.choose{
+    position: relative;
+    top: 40px;
+}
+.layui-inline{
+
+}
+#timechoose{
+    position: relative;
+    transform: translateX(28px) translateY(-70px);
+}
+.test{
+    position: relative;
+    transform: translateY(-20px) translateX(120px);
+}
+#exetypechoose{
+    position: relative;
+    transform: translateY(-120px) translateX(-15px);
+}
+#zhineng1{
+    display: block;
+}
+#zhineng2_1{
+    display: none;
+}
+#zhineng2_2{
+    display: none;
+}
+
+#exetimer{
+    transform: translateX(-30px);
+}
+#zhineng3{
+    display:none;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用openHAB</title>
+</head>
+<body>
+<br><br><br><br><br><br>
+<div style="text-align: center">
+测试页面
+<div>
+    欢迎你，<span th:text="${session.user.name}"></span>
+
+    <form action="/ssmForIDEA_war/quitUser.do" id="logout">
+    <input type="submit"   value="退出登录"/>
+    </form>
+
+    <br> 欢迎您，<!--/*@thymesVar id="name" type=""*/-->
+    <input type="text" th:value="${name}"></input>>
+    <br>
+    可以点击去<a href="toLogin.do">登录</a>，或者<a href="toReg.do">注册</a>
+
+</div>
+</div>
+</body>
+<script type="text/javascript" src="/ssmForopenHAB_war/resource/js/changjing.js"></script>
+</html>

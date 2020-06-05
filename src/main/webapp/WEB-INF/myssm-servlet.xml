@@ -7,6 +7,7 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+<!--   注意，此文件为springMVC的配置文件，是整体的子容器，一般解析controller-->
     <!-- 使用注解驱动 -->
     <mvc:annotation-driven />
 <!--    以下是spring的拦截器，-->
@@ -16,15 +17,52 @@
 <!--            <mvc:mapping path="/params/*"/>-->
 <!--            <bean class="com.xhf.intercepter.RoleInterceptor"/>-->
 <!--        </mvc:interceptor>-->
-
 <!--    </mvc:interceptors>-->
     <!-- 定义扫描装载的包 -->
     <context:component-scan base-package="com.xhf.*" />
     <!-- 定义视图解析器 -->
     <!-- 找到Web工程/WEB-INF/JSP文件夹，且文件结尾为jsp的文件作为映射 -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+<!--    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+<!--          p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />-->
+    <bean id="templateResolver"
+          class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/WEB-INF/html/"/>
+        <property name="suffix" value=".html"/>
+        <property name="characterEncoding" value="UTF-8"/>
+        <property name="order" value="1"/>
+        <property name="templateMode" value="HTML5"/>
+        <property name="cacheable" value="false"/>
 
+    </bean>
 
+    <bean id="templateEngine"
+          class="org.thymeleaf.spring5.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver"/>
+    </bean>
 
+    <bean id="viewResolver" class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+<!--    开放静态资源-->
+    <mvc:resources location="/static/" mapping="/resource/**"/>
+
+    <bean id="config" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list><!-- 如果只有一个文件，就不用写list-->
+                <value>classpath:filelocation_config.properties</value>
+                <value>classpath:mailsendconfig.properties</value>
+                <!-- 推荐使用file的方式引入，这样可以将配置和代码分离  <value>file:/opt/demo/config/demo-mq.properties</value>-->
+            </list>
+        </property>
+        <!--       Spring有 <context:property-placeholder/>元素。
+        配置示例如下，启用后，不用配置PropertyPlaceholderConfigurer对象了。
+        <context:property-placeholder location="userinfo.properties"/>
+         这样在程序代码中直接用@Value("${name}")就能直接取到properties文件中定义的变量值。-->
+        <!--
+        但是在Controller中取不到这个值，直接输出了${name}字符串，并没有解析出值，而在service中却能取到。
+        这是由于Controller是定义在springmvc的servlet配置文件中的，所以在Controller中使用@Value注解会从springmvc的配置中查找，
+        故只需要将placeholder重新在springmvc的配置中配置一遍，Controller中的@Value注解便能取到值了。
+        -->
+    </bean>
 </beans>
