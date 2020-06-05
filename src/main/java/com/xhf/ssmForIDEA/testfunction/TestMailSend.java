@@ -1,6 +1,8 @@
 package com.xhf.ssmForIDEA.testfunction;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import com.xhf.ssmForIDEA.controller.JsonController;
+import com.xhf.ssmForIDEA.service.impl.JsonServiceImpl;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -18,11 +20,12 @@ public class TestMailSend {
     private static String password = "FRIWNLJERSQRUOLH"; // 发件人邮箱客户端授权码
 
     public static void main(String[] args) {
-        //testrandom();
+        testrandom();
     }
     public static void testrandom(){
-
+//        JsonController jc =new JsonController();
+        JsonServiceImpl js =new JsonServiceImpl();
+       js.itemtodatabase();
     }
-
 
 }

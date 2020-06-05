@@ -19,11 +19,12 @@ function zdy() {
 }
 function paper() {
 //    kuang.src ="https://www.w3school.com.cn/";
-    kuang.setAttribute("src","https://www.baidu.com/");
+    kuang.setAttribute("src","http://localhost:8081/paperui/#/control");
+    kuang.src ="http://localhost:8081/paperui/#/control"
 }
 function basic() {
     //kuang.src ="https://www.w3school.com.cn/";
-    kuang.setAttribute("src","https://www.w3school.com.cn/");
+    kuang.setAttribute("src","http://localhost:8081/basicui/app");
 }
 function zhanghao() {
     kuang.setAttribute("src","touser_admin");//touser_admin

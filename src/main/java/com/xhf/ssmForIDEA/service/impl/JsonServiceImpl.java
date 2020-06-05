@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xhf.ssmForIDEA.dao.RuleDao;
 import com.xhf.ssmForIDEA.dao.UtilDao;
+import com.xhf.ssmForIDEA.pojo.Item;
 import com.xhf.ssmForIDEA.pojo.Thing;
 import com.xhf.ssmForIDEA.service.JsonService;
 import com.xhf.ssmForIDEA.testfunction.DomainDemo;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 @Service
@@ -33,8 +36,13 @@ public class JsonServiceImpl implements JsonService {
     @Value("${sitemapspath}")
     String sitemapspath;
 
+    @Value("${itemjson}")
+    String itemjson;
+
     @Autowired
     RuleDao ruleDao;
+    @Autowired
+    UtilDao utilDao;
 
     @Override
     public boolean thinngstoI_S() {
@@ -48,43 +56,43 @@ public class JsonServiceImpl implements JsonService {
         return false;
     }
 
+    @Override
+    public boolean itemtodatabase()  {
+        //先解析json
+         File items=new File(itemjson);
+         int max=utilDao.get_maxid_fromitem_device();
 
+    try {
+        String input = FileUtils.readFileToString(items, "UTF-8");
+        JSONObject jsonObjectParent = JSONObject.parseObject(input);
+        Set<String> keySetParent = jsonObjectParent.keySet();
+        int num=keySetParent.size() -max;
 
-    public  void thingtoitem_and_sitemmap(ArrayList<Thing> lists){
-
-        System.out.println(lists.size());
-        //遍历list,然后按照label创建文件
-
-        String  itempath="items\\";
-
-        File sitemap =new File(paths+sitemapspath);
-        //
-        for (Thing thing: lists) {
-            String s=thing.getLabel();//用这个替换label,然后创建文件
-            s=s.replace(" ","_");
-            s=s.replace("/","_");
-            String s2=s+".items";
-            File item =new File(itemspath+s2);
-            try {
-                if (item.exists()){
-                    boolean de= item.delete();
-                    // System.out.println("文件删除"+de);
-                }
-                //这里开始将读thing的item写进文件
-                boolean t=item.createNewFile();
-                //System.out.println(s+"文件创建："+t);
-            }catch (IOException IOe){
-                System.out.println("文件读取失败");
+        for(String keyParent : keySetParent){
+            num--;
+            String itemname=keyParent;
+            String device =itemname.split("_")[0];
+            JSONObject item = jsonObjectParent.getJSONObject(keyParent);//child是每个item
+            //String clazz = jsonObjectChild.getString("class");
+            JSONObject value =item.getJSONObject("value");
+            String type=value.getString("itemType");
+            String label =value.getString("label");
+            Item item1 = new Item();
+            item1.setDevice(device);
+            item1.setItemname(itemname);
+            item1.setType(type);
+            utilDao.additem_device(item1);
+            if (num ==0){
+                break;
             }
-            catch (Exception e){
-                System.out.println("创建文件失败了");
-            }
-            writetoitem(item,thing.getChannels(),s);
-            writetositemap(sitemap,s);
-            System.out.println();
         }
+    }catch (IOException ioe){
+        System.out.println("itemjson未找到");
+        ioe.getStackTrace();
     }
 
+        return true;
+    }
 
 
     public   ArrayList<Thing> get_things() throws IOException {
@@ -92,7 +100,7 @@ public class JsonServiceImpl implements JsonService {
         //将所要thing添加进去things，
         // 然后遍历things，把每个things的channels遍历一遍，在这个遍历中，创建文档到items
         final String path =jsonpath;
-                //"C:\\Users\\Dell\\Desktop\\OpenHAB\\2_5\\openhab-2.5.3\\userdata\\jsondb\\org.eclipse.smarthome.core.thing.Thing.json";
+        //"C:\\Users\\Dell\\Desktop\\OpenHAB\\2_5\\openhab-2.5.3\\userdata\\jsondb\\org.eclipse.smarthome.core.thing.Thing.json";
 
         File filepath =new File(path);
 
@@ -133,6 +141,44 @@ public class JsonServiceImpl implements JsonService {
 
         return things;
     }
+
+
+    public  void thingtoitem_and_sitemmap(ArrayList<Thing> lists){
+
+        System.out.println(lists.size());
+        //遍历list,然后按照label创建文件
+
+        String  itempath="items\\";
+
+        File sitemap =new File(paths+sitemapspath);
+        //
+        for (Thing thing: lists) {
+            String s=thing.getLabel();//用这个替换label,然后创建文件
+            s=s.replace(" ","_");
+            s=s.replace("/","_");
+            String s2=s+".items";
+            File item =new File(itemspath+s2);
+            try {
+                if (item.exists()){
+                    boolean de= item.delete();
+                    // System.out.println("文件删除"+de);
+                }
+                //这里开始将读thing的item写进文件
+                boolean t=item.createNewFile();
+                //System.out.println(s+"文件创建："+t);
+            }catch (IOException IOe){
+                System.out.println("文件读取失败");
+            }
+            catch (Exception e){
+                System.out.println("创建文件失败了");
+            }
+            writetoitem(item,thing.getChannels(),s);
+            writetositemap(sitemap,itemspath+s2,s);
+            System.out.println();
+        }
+    }
+
+
 
 
     public  boolean writetoitem(File file , HashMap map, String groupname){
@@ -182,13 +228,25 @@ public class JsonServiceImpl implements JsonService {
        return i;
     }
 
-    public  boolean writetositemap(File file,String groupname ){
+    public  boolean writetositemap(File file,String  path,String groupname ){
+
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(path));
+            //System.out.println(lines);
+            lines.set(lines.size() -1,"\n");
+            // System.out.println(lines);
+            Files.write(Paths.get(path), lines);
+        } catch (IOException e) {
+            System.out.println("未找到报警规则文件");
+            e.printStackTrace();
+        }
+
         try {
             //写入相应的文件
             FileWriter fw = new FileWriter(file, true);
             String content ="Frame label=\"请点击英文书名号进入子界面控制设备" +"\" {"
                     +"Group  " +"item="+groupname+"   label=\""+groupname+"\""
-                    +"\n}\n\n";
+                    +"\n}\n}\n";
             System.out.println(content);
             fw.write(content);
             fw.close();
