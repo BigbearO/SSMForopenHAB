@@ -24,33 +24,6 @@ layui.use('laydate', function() {
     });
 });
 
-var  secondechoose =[
-    ["thing-item"],//这里列出所有可选item-中文名字,thing-item,value=tid-iid
-    ["每天","一次","周一到周五"]
-];
-
-var thirdchoice=[
-    ["on","off"]
-]
-
-function setSecond(){
-    var firstchoose =document.getElementById('first');
-    var soc = document.getElementById('second');
-    var choice =secondechoose[firstchoose.selectedIndex-1];
-    //  alert(choice);
-    soc.options.length=1;
-    for(var i=0;i<choice.length;i++){
-        soc[i+1]=new Option(choice[i],firstchoose.selectedIndex+""+i);
-    }
-}
-
-function setthird() {
-    var second =document.getElementById('second');
-    var third =document.getElementById('third');
-    var v= 1;
-
-}
-
 function JTrim(s)
 {
     return s.replace(/(^\s*)|(\s*$)/g, "");
@@ -223,10 +196,25 @@ var itemofdevice =[
     [{ 是否在用:"3"},{供电:"4"}]//都是开关
 ]
 
-function testjson(){
-    var firstchoose =document.getElementById('device_name');
-    var soc = document.getElementById('exeitem');
-    var choice =itemofdevice[firstchoose.selectedIndex];
+var menchuangtri =[{ 省电模式:"1"},{门窗开关状态:"4"} ,{报警时长:"2"},{电量等级:"5"}]
+
+var menchuangexe=[{ 省电模式:"1"}]//[{ 省电模式:"1"},{网关声音：}]
+
+var shuzu1 =[
+
+    [{状态改变:"changed"},{变为开启:"changed to on"},{变为关闭:"changed to off"},{从开到关:"changed from on to off"},{从关到开:"changed from off to on"}],
+    [{状态改变:"changed"},{变为开启:"changed to OPEN"},{变为关闭:"changed to CLOSED"}],
+    [{状态改变:"changed"}]
+    [{状态改变:"changed"}]
+]
+
+var shuzu2 =[
+    [{状态改变:"changed"},{变为开启:"changed to on"},{变为关闭:"changed to off"},{从开到关:"changed from on to off"},{从关到开:"changed from off to on"}],
+]
+function changestatus(){
+    var firstchoose =document.getElementById('when_item_id');
+    var soc = document.getElementById('when_item_status');
+    var choice =shuzu1[firstchoose.selectedIndex];
     //  alert(choice);
     soc.options.length=0;
     //现在获取到了json的数组，目前要，将json格式化
@@ -237,10 +225,27 @@ function testjson(){
         }
     }
 }
+
+function testjson(){
+    var firstchoose =document.getElementById('device_name');
+    var soc = document.getElementById('exeitem');
+    var choice =menchuangtri[firstchoose.selectedIndex];
+    //  alert(choice);
+    soc.options.length=0;
+    //现在获取到了json的数组，目前要，将json格式化
+    for(var i=0;i<choice.length;i++){
+        for(var key in choice[i]){
+            // alert(key+""+choice[i][key]);
+            soc[i]=new Option(key,choice[i][key]);//text,value
+        }
+    }
+}
+
+
 function testjson2(){
     var firstchoose =document.getElementById('when_device_name');
     var soc = document.getElementById('when_item_id');
-    var choice =itemofdevice[firstchoose.selectedIndex];
+    var choice =menchuangexe[firstchoose.selectedIndex];
     //  alert(choice);
     soc.options.length=0;
     //现在获取到了json的数组，目前要，将json格式化

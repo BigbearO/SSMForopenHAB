@@ -27,8 +27,8 @@
             <!--style="display: none"-->
                 <fieldset >
                     <legend style="color: orangered; font-size:20px">选       择       执          行          条        件</legend>
-                    <label >填写cron表达式：</label>   <input type="text" name="cron" id="cron" class="zhineng"><br>
-                    <label>选 择 时 分 秒：</label>
+<!--                    <label >填写cron表达式：</label>   <input type="text" name="cron" id="cron" class="zhineng"><br>-->
+<!--                    <label>选 择 时 分 秒：</label>-->
                     <div class="layui-inline" >
                         <div class="layui-input-inline" id="timechoose">
                             <input type="text" class="layui-input" name="hms" id="test4" placeholder="HH:mm:ss">
@@ -55,21 +55,26 @@
                 <legend style="color: orangered; font-size:20px">选       择       执          行          条        件</legend>
                 <label>选择触发条件的硬件与硬件属性：</label>
                 <!--所有的option的value都是itemid-->
-                <select name="when_device_name" id="when_device_name" onchange="testjson2()">
-                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>
+                <select name="when_device_name" id="when_device_name" >
+<!--                    //onchange="testjson2()"-->
+<!--                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>-->
 <!--                    <option value="Xiaomi_Mi_Smart_Home_Gateway">小米网关</option>-->
                     <option value="Xiaomi_Door_Window_Sensor"> 门窗传感器</option>
-                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>
-                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>
+<!--                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>-->
+<!--                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>-->
                 </select>
 
-                <select name="when_item_id" id="when_item_id" >
+                <select name="when_item_id" id="when_item_id" onchange="changestatus()">
                     <!--<optgroup label="小米网关"></optgroup>-->
-                    <option value="7" >低电量模式</option>
+                    <option value="1" >省电模式</option>
+                    <option value="4" >门窗开关状态</option>
+                    <option value="2" >报警时长</option>
+                    <option value="5" >电量等级</option>
+<!--                    { 门窗开关状态:"4"} ,{ :"1"},{报警时长:"2"},{电量等级:"5"}-->
                 </select>
 
                 <label>选择触发事件状态：</label>
-                <select name="when_item_status">
+                <select name="when_item_status" id="when_item_status">
                     <option value="changed">状态改变</option>
                     <option value="changed to on">变为开启</option>
                     <option value="changed to off">变为关闭</option>
@@ -85,17 +90,17 @@
                 <legend style="color: orangered; font-size:20px">选       择       执          行          结        果</legend>
                 <label>选择结果事件属性：</label>
                 <!--所有的option的value都是itemid-->
-                <select name="then_device_name" id="device_name" onchange="testjson()">
-                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>
+                <select name="then_device_name" id="device_name">
+<!--                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>-->
 <!--                    <option value="Xiaomi_Mi_Smart_Home_Gateway">小米网关</option>-->
                     <option value="Xiaomi_Door_Window_Sensor"> 门窗传感器</option>
-                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>
-                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>
+<!--                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>-->
+<!--                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>-->
                 </select>
 
                 <select name="then_item_id" id="exeitem">
                     <!--<optgroup label="小米网关"></optgroup>-->
-                    <option value="7" >低电量模式</option>
+                    <option value="1" >省电模式</option>
                 </select>
 
                 <label>选择触发事件状态：</label>

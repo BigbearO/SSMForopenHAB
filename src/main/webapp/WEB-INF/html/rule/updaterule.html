@@ -32,7 +32,7 @@
             <!--style="display: none"-->
                 <fieldset >
                     <legend style="color: orangered; font-size:20px">选       择       执          行          条        件</legend>
-                    <label >填写cron表达式：</label>   <input type="text" name="cron" id="cron" class="zhineng"><br>
+<!--                    <label >填写cron表达式：</label>   <input type="text" name="cron" id="cron" class="zhineng"><br>-->
 
                     <label>选 择 时 分 秒：</label>
                     <div class="layui-inline" >
@@ -90,16 +90,16 @@
                 <legend style="color: orangered; font-size:20px">选       择       执          行          结        果</legend>
                 <label>选择结果事件属性：</label>
                 <select name="then_device_name" id="device_name" onchange="testjson()">
-                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>
+<!--                    <option value="Xiaomi_Mi_Wireless_Switch">无线开关</option>-->
 <!--                    <option value="Xiaomi_Mi_Smart_Home_Gateway">小米网关</option>-->
                     <option value="Xiaomi_Door_Window_Sensor"> 门窗传感器</option>
-                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>
-                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>
+<!--                    <option value="Xiaomi_Mi_Motion_Sensor">人体传感器</option>-->
+<!--                    <option value="Xiaomi_Mi_Smart_Socket_Plug">智能插座</option>-->
                 </select>
 
-                <select name="then_item_id" id="exeitem">
+                <select name="then_item_id" id="exeitem" onchange="changestatus()">
                     <!--<optgroup label="小米网关"></optgroup>-->
-                    <option value="7" >低电量模式</option>
+                    <option value="1" >省电模式</option>
                 </select>
 
                 <label>选择触发事件状态：</label>
